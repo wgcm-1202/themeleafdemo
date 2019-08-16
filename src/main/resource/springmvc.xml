@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+<context:component-scan base-package="com.controller"></context:component-scan>
+    <mvc:annotation-driven/>
+    <mvc:resources mapping="/static/**" location="/static/"/>
+    <bean id="resolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+        <property name="prefix" value="/WEB-INF/templates/"></property>
+        <property name="suffix" value=".html"></property>
+        <property name="templateMode" value="HTML5"></property>
+        <property name="cacheable" value="false"/>
+        <property name="characterEncoding" value="UTF-8"></property>
+    </bean>
+    <bean id="engine" class="org.thymeleaf.spring5.SpringTemplateEngine">
+        <property name="templateResolver" ref="resolver"></property>
+    </bean>
+    <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+        <property name="characterEncoding" value="UTF-8"></property>
+        <property name="templateEngine" ref="engine">
+        </property>
+    </bean>
+</beans>
